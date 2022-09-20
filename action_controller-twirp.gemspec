@@ -5,22 +5,17 @@ Gem::Specification.new do |spec|
   spec.version     = ActionController::Twirp::VERSION
   spec.authors     = ["Kosuke Arisawa"]
   spec.email       = ["arisawa@gmail.com"]
-  spec.homepage    = "TODO"
-  spec.summary     = "TODO: Summary of ActionController::Twirp."
-  spec.description = "TODO: Description of ActionController::Twirp."
-    spec.license     = "MIT"
-  
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the "allowed_push_host"
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
-  spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
+  spec.homepage    = "https://github.com/arisawa/action_controller-twirp"
+  spec.summary     = "Twirp for Rails Controller"
+  spec.description = "You can implement twirp service with Rails controller"
+  spec.license     = "MIT"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "TODO: Put your gem's public repo URL here."
-  spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
 
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
-    Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+    Dir["{app,config,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
   end
 
-  spec.add_dependency "rails", ">= 7.0.4"
+  spec.add_dependency "rails", ">= 6.0.0"
+  spec.add_dependency "twirp", "~> 1.9"
 end
