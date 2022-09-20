@@ -5,6 +5,8 @@ AllCops:
   Exclude:
     - 'action_controller-twirp.gemspec'
     - 'vendor/bundle/**/*'
+    - 'test/dummy/lib/user_pb.rb'
+    - 'test/dummy/lib/user_twirp.rb'
 
 Style/Documentation:
   Enabled: true
