@@ -15,7 +15,7 @@ module ActionController
       status, header, body = twirp_service_class.new(self)&.call(request.env)
 
       response.status = status
-      response.header.merge(header)
+      response.header.merge!(header)
       response.body = body
     end
 

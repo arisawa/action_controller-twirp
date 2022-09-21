@@ -8,6 +8,7 @@ class UsersTest < ActionDispatch::IntegrationTest
 
     assert_equal(200, status)
     assert_equal({ users: [{ id: '1', name: 'Anna' }, { id: '2', name: 'Reina' }] }.to_json, body)
+    assert_equal('application/json', response.header['Content-Type'])
   end
 
   test '#get_user is given existing id' do
@@ -15,6 +16,7 @@ class UsersTest < ActionDispatch::IntegrationTest
 
     assert_equal(200, status)
     assert_equal({ id: '1', name: 'Anna' }.to_json, body)
+    assert_equal('application/json', response.header['Content-Type'])
   end
 
   test '#get_user is given unknown id and handle_exceptions is false' do
@@ -29,5 +31,6 @@ class UsersTest < ActionDispatch::IntegrationTest
       }.to_json,
       body
     )
+    assert_equal('application/json; charset=utf-8', response.header['Content-Type'])
   end
 end
