@@ -12,3 +12,6 @@ Style/Documentation:
   Enabled: true
   Exclude:
     - 'test/**/*'
+
+Style/IfUnlessModifier:
+  Enabled: false
