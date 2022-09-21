@@ -1,5 +1,8 @@
 # ActionController::Twirp
 
+[![build](https://github.com/arisawa/action_controller-twirp/actions/workflows/ruby.yml/badge.svg)](https://github.com/arisawa/action_controller-twirp/actions/workflows/ruby.yml)
+![License](https://img.shields.io/github/license/arisawa/action_controller-twirp)
+
 Implement twirp service with Rails controller.
 
 ## Installation
