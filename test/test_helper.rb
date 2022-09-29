@@ -16,4 +16,5 @@ if ActiveSupport::TestCase.respond_to?(:fixture_path=)
   ActiveSupport::TestCase.fixtures :all
 end
 
+require 'generators/action_controller/twirp/install_generator'
 require_relative '../test/dummy/lib/user_twirp'
