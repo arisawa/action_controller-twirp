@@ -3,13 +3,6 @@
 class UsersController < ApplicationController # :nodoc:
   include ActionController::Twirp
 
-  rescue_from ActiveRecord::RecordNotFound do |e|
-    twerr = Twirp::Error.not_found('The message',
-                                   reason: e.class.name.demodulize,
-                                   id: params[:id].to_s)
-    render twirp_error: twerr
-  end
-
   USERS = [
     { id: 1, name: 'Anna' },
     { id: 2, name: 'Reina' }
