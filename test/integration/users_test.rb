@@ -3,17 +3,7 @@
 require 'test_helper'
 
 class UsersTest < ActionDispatch::IntegrationTest
-  def config
-    ActionController::Twirp::Config
-  end
-
-  def setup
-    @config = config.class_variables.to_h { |v| [v, config.class_variable_get(v)] }.to_h
-  end
-
-  def teardown
-    @config.each { |k, v| config.class_variable_set(k, v) } # rubocop:disable Style/ClassVars
-  end
+  include ConfigHelper
 
   test '#list_users' do
     post '/twirp/example.v1.UserApi/ListUsers', params: {}, as: :json
