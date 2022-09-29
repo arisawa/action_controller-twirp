@@ -2,7 +2,7 @@
 
 ActionController::Twirp::Config.setup do |config|
   # Handle exceptions
-  #   true: handling by ActionTwirpRails
+  #   true: handling by ActionController::Twirp
   #   false: handling by Twirp::Service (default)
   # config.handle_exceptions = false
 
