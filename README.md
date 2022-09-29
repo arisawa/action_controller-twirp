@@ -51,13 +51,6 @@ Finally, implement rpc method your controller
 class UsersController < ApplicationController # :nodoc:
   include ActionController::Twirp
 
-  rescue_from ActiveRecord::RecordNotFound do |e|
-    twerr = Twirp::Error.not_found('The message',
-                                   reason: e.class.name.demodulize,
-                                   id: params[:id].to_s)
-    render twirp_error: twerr
-  end
-
   USERS = [
     { id: 1, name: 'Anna' },
     { id: 2, name: 'Reina' }
@@ -74,6 +67,48 @@ class UsersController < ApplicationController # :nodoc:
 
     Example::V1::User.new(user)
   end
+end
+```
+
+### Error handling
+
+twirp-ruby eventually provides us with a rack app, which handles the exception and returns a response when an exception occurs.
+Provide settings for exception handling, as the status code or body may be unexpected when an error occurs.
+
+You can install initializer by rails generate command
+```sh
+> bin/rails generate action_controller:twirp:install
+
+> cat config/initializers/action_controller_twirp.rb
+# frozen_string_literal: true
+
+ActionController::Twirp::Config.setup do |config|
+  # Handle exceptions
+  #   true: handling by ActionController::Twirp
+  #   false: handling by Twirp::Service (default)
+  # config.handle_exceptions = false
+
+  # ---
+  # The following configurations ignore when handle_exceptions is false
+  # ---
+
+  # Mapping your exception classes and Twirp::Error::ERROR_CODES
+  # String => Symbol
+  # config.exception_codes = {
+  #   'ActiveRecord::RecordInvalid' => :invalid_argument,
+  #   'ActiveRecord::RecordNotFound' => :not_found,
+  #   'My::Exception' => :aborted,
+  # }
+
+  # Block to make Twirp::Error message when exception_codes exist
+  # config.build_message = ->(exception) {}
+
+  # Block to make Twirp::Error metadata. when exception_codes exist
+  # It MUST return Hash value
+  # config.build_metadata = ->(exception) {}
+
+  # Block to run additional process. e.g. logging
+  # config.on_exceptions = ->(exception) {}
 end
 ```
 
