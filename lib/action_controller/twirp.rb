@@ -12,7 +12,7 @@ module ActionController
 
     # Override it to call a twirp class from request path
     def send_action(*_args)
-      twirp_service_class.raise_exceptions = Config.handle_exceptions
+      twirp_service_class.raise_exceptions = true
 
       status, header, body = twirp_action
 

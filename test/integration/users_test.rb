@@ -38,33 +38,7 @@ class UsersTest < ActionDispatch::IntegrationTest
     assert_equal('application/json', response.header['Content-Type'])
   end
 
-  test '#get_user is given unknown id and handle_exceptions is false' do
-    config.setup do |c|
-      c.handle_exceptions = false
-    end
-
-    post '/twirp/example.v1.UserApi/GetUser',
-         params: { id: 100 },
-         headers: { 'X-User-Id' => 1 },
-         as: :json
-
-    assert_equal(500, status)
-    assert_equal(
-      {
-        code: 'internal',
-        msg: 'ActiveRecord::RecordNotFound',
-        meta: { cause: 'ActiveRecord::RecordNotFound' }
-      }.to_json,
-      body
-    )
-    assert_equal('application/json', response.header['Content-Type'])
-  end
-
-  test '#get_user is given unknown id and handle_exceptions = true' do
-    config.setup do |c|
-      c.handle_exceptions = true
-    end
-
+  test '#get_user is given unknown id' do
     post '/twirp/example.v1.UserApi/GetUser',
          params: { id: 100 },
          headers: { 'X-User-Id' => 1 },
@@ -77,7 +51,6 @@ class UsersTest < ActionDispatch::IntegrationTest
 
   test '#get_user is given unknown id and on_exceptions is configured' do
     config.setup do |c|
-      c.handle_exceptions = true
       c.on_exceptions = ->(e) { Rails.logger.error(e.class.name.demodulize) }
     end
 
@@ -97,7 +70,6 @@ class UsersTest < ActionDispatch::IntegrationTest
 
   test '#get_user is given unknown id and on_exceptions is configured but raises StandardError' do
     config.setup do |c|
-      c.handle_exceptions = true
       c.on_exceptions = ->(_) { raise StandardError }
     end
 

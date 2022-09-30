@@ -6,15 +6,6 @@ module ActionController
   module Twirp
     # Configration for ActionController::Twirp
     module Config
-      # Handle exceptions
-      #   true: handling by ActionController::Twirp
-      #   false: handling by Twirp::Service
-      mattr_accessor :handle_exceptions, default: false
-
-      # ---
-      # The following configurations ignore when handle_exceptions is false
-      # ---
-
       # Mapping your exception classes and Twirp::Error::ERROR_CODES
       mattr_accessor :exception_codes, default: {}
 
