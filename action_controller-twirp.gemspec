@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
     Dir['{app,config,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
   end
 
-  spec.add_dependency 'rails', '>= 6.0.0'
+  spec.add_dependency 'rails', '>= 5.0.0'
   spec.add_dependency 'twirp', '~> 1.9'
 
   spec.add_development_dependency 'rubocop', '~> 1.36.0'
