@@ -29,7 +29,12 @@ It provides routing method `twirp` that maps twirp service class and Rails contr
 
 First, you should generate twirp service class. see: [example in twirp-ruby](https://github.com/twitchtv/twirp-ruby/wiki#usage-example)
 
-Next, add twirp action in config/routes.rb
+Next, install initializer.
+```sh
+bin/rails g action_controller:twirp:install
+```
+
+Next, add twirp action in config/routes.rb.
 ```ruby
 Rails.application.routes.draw do
   scope :twirp do
@@ -38,7 +43,7 @@ Rails.application.routes.draw do
 end
 ```
 
-Result of `bin/rails routes`
+Result of `bin/rails routes`.
 ```sh
 > bin/rails routes
  Prefix  Verb  URI Pattern                                    Controller#Action
@@ -46,7 +51,7 @@ Result of `bin/rails routes`
          POST  /twirp/example.v1.UserApi/GetUser(.:format)    users#get_user
 ```
 
-Finally, implement rpc method your controller
+Finally, implement rpc method your controller.
 ```ruby
 class UsersController < ApplicationController
   include ActionController::Twirp
@@ -74,7 +79,7 @@ end
 
 We must follow protocol when using Twirp. Specifically,
 
-- It accepts request parameters specified in proto file, and must return response body
+- It accepts request parameters specified in proto file, and must return response body.
 - If an exception occurs, a response body of Twirp::Error's JSON must be returned.
 
 This section describes when an exception occurs.
@@ -100,21 +105,19 @@ For example, if an exception occurs in the callback, Rails app will return a res
 
 This is easy to do, see below.
 
-First, you can install initializer by rails generate command
+First, modify `exception_codes` config.
 ```sh
-> bin/rails generate action_controller:twirp:install
-
 > cat config/initializers/action_controller_twirp.rb
 # frozen_string_literal: true
 
 ActionController::Twirp::Config.setup do |config|
   # Mapping your exception classes and Twirp::Error::ERROR_CODES
   # String => Symbol
-  # config.exception_codes = {
-  #   'ActiveRecord::RecordInvalid' => :invalid_argument,
-  #   'ActiveRecord::RecordNotFound' => :not_found,
-  #   'MyApp::Unauthenticated' => :unauthenticated,
-  # }
+  config.exception_codes = {
+    'ActiveRecord::RecordInvalid' => :invalid_argument,
+    'ActiveRecord::RecordNotFound' => :not_found,
+    'MyApp::Unauthenticated' => :unauthenticated,
+  }
 
   # Block to make Twirp::Error message when exception_codes exist
   # config.build_message = ->(exception) {}
