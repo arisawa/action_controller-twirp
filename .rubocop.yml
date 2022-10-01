@@ -15,3 +15,8 @@ Style/Documentation:
 
 Style/IfUnlessModifier:
   Enabled: false
+
+Metrics/ClassLength:
+  Enabled: true
+  Exclude:
+    - 'test/**/*'

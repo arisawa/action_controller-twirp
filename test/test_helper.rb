@@ -18,4 +18,5 @@ end
 
 require 'action_controller/twirp'
 require 'generators/action_controller/twirp/install_generator'
+require 'config_helper'
 require_relative '../test/dummy/lib/user_twirp'
